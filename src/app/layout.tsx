@@ -1,7 +1,8 @@
+import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import CartProvider, { CartContext } from "@/presentation/context/CartContext";
+import CartProvider from "@/presentation/context/CartContext";
 import Summary from "@/presentation/component/Summary";
 
 const inter = Inter({ subsets: ["latin"] });

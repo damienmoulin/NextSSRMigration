@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 type ProductType = {

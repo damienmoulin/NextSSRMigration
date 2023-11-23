@@ -1,6 +1,6 @@
 "use client";
 
-import { FunctionComponent, useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import Image from "next/image";
 
