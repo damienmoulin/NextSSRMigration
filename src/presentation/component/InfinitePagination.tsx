@@ -22,6 +22,7 @@ const InfinitePagination: FunctionComponent<InfinitePaginationType> = ({
   const [page, setPage] = useState<number>(1);
   const observerIntercepter = useRef(null);
 
+  //Observer allow the possibility to look when element 'observerTarget' come into view
   const observer = useRef(
     new IntersectionObserver((entries) => {
       const first = entries[0];
@@ -36,18 +37,9 @@ const InfinitePagination: FunctionComponent<InfinitePaginationType> = ({
   }, [page]);
 
   useEffect(() => {
-    if (
-      observerIntercepter &&
-      observerIntercepter.current &&
-      page < numberOfPages &&
-      !isLoading
-    ) {
+    if (observerIntercepter.current && page < numberOfPages && !isLoading) {
       observer.current.observe(observerIntercepter.current);
-    } else if (
-      observerIntercepter &&
-      observerIntercepter.current &&
-      isLoading
-    ) {
+    } else if (observerIntercepter.current && isLoading) {
       observer.current.unobserve(observerIntercepter.current);
     }
 
@@ -61,6 +53,7 @@ const InfinitePagination: FunctionComponent<InfinitePaginationType> = ({
   return (
     <>
       {children}
+      {isLoading && <>Loading</>}
       <div ref={observerIntercepter}></div>
     </>
   );
