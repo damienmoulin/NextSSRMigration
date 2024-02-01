@@ -3,7 +3,7 @@
 import { fetchProducts } from "@/data/fetchProducts";
 import InfinitePagination from "@/presentation/component/InfinitePagination";
 import Product from "@/presentation/component/Product";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function ClientPage() {
   const [productsList, setProductsList] = useState<ProductList>();

@@ -26,7 +26,7 @@ export const productsMock = [
 ];
 
 const getProducts = (page: number, numberOfProducts: number) => {
-  let products = [];
+  const products = [];
   for (let i = 1; i <= numberOfProducts; i++) {
     products.push({
       id: (page - 1) * numberOfProducts + i,

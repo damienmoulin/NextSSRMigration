@@ -1,4 +1,4 @@
-import {
+import React, {
   FunctionComponent,
   ReactNode,
   useEffect,
@@ -22,30 +22,36 @@ const InfinitePagination: FunctionComponent<InfinitePaginationType> = ({
   const [page, setPage] = useState<number>(1);
   const observerIntercepter = useRef(null);
 
-  //Observer allow the possibility to look when element 'observerTarget' come into view
-  const observer = useRef(
-    new IntersectionObserver((entries) => {
-      const first = entries[0];
-      if (first.isIntersecting) {
-        setPage((page) => page + 1);
-      }
-    })
-  );
-
   useEffect(() => {
     fetchData(page);
   }, [page]);
 
   useEffect(() => {
-    if (observerIntercepter.current && page < numberOfPages && !isLoading) {
-      observer.current.observe(observerIntercepter.current);
-    } else if (observerIntercepter.current && isLoading) {
-      observer.current.unobserve(observerIntercepter.current);
+    const observer = new IntersectionObserver((entries) => {
+      const first = entries[0];
+      if (first.isIntersecting) {
+        setPage((page) => page + 1);
+      }
+    });
+
+    if (
+      observerIntercepter &&
+      observerIntercepter.current &&
+      page < numberOfPages &&
+      !isLoading
+    ) {
+      observer.observe(observerIntercepter.current);
+    } else if (
+      observerIntercepter &&
+      observerIntercepter.current &&
+      isLoading
+    ) {
+      observer.unobserve(observerIntercepter.current);
     }
 
     return () => {
       if (observerIntercepter.current) {
-        observer.current.unobserve(observerIntercepter.current);
+        observer.unobserve(observerIntercepter.current);
       }
     };
   }, [observerIntercepter, numberOfPages, page, isLoading]);

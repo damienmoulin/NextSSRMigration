@@ -1,6 +1,6 @@
 "use client";
 
-import {
+import React, {
   FunctionComponent,
   ReactNode,
   createContext,
@@ -32,7 +32,6 @@ const CartProvider: FunctionComponent<{ children: ReactNode }> = ({
   const addProduct = useCallback(
     (product: Product) => {
       setCart([...cart, product]);
-      console.log(cart);
     },
     [cart]
   );
